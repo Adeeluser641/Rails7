@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+ 
+ <%= javascript_importmap_tags %>
+  </head>
+
+  <body class= "prose">
+
+   <p class="notice"><%= notice %></p>
+   <p class="alert"><%= alert %></p>
+
+<div> 
+<% if user_signed_in? %>
+<%= link_to "Profile", edit_user_registration_path %>
+<%= button_to "Log Out", destroy_user_session_path, method: :delete %>
+<% else %>
+<%= link_to "Log In", new_user_session_path %>
+<%= link_to "Sign up", new_user_registration_path %>
+<% end %>
+</div>
+
+
+
+
+    <%= yield %>
+  </body>
+</html>
