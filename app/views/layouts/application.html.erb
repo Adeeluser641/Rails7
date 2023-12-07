@@ -5,25 +5,37 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  
  
  <%= javascript_importmap_tags %>
   </head>
 
-  <body class= "prose">
+  <body class>
 
    <p class="notice"><%= notice %></p>
    <p class="alert"><%= alert %></p>
 
-<div> 
-<% if user_signed_in? %>
-<%= link_to "Profile", edit_user_registration_path %>
-<%= button_to "Log Out", destroy_user_session_path, method: :delete %>
-<% else %>
-<%= link_to "Log In", new_user_session_path %>
-<%= link_to "Sign up", new_user_registration_path %>
-<% end %>
-</div>
+<nav class="bg-gray-800 p-4 w-full">
+    <div class="mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+            <a href="<%= edit_user_registration_path %>" class="text-white font-bold">Profile</a>
+            <a href="<%= posts_path %>" class="text-white font-bold ml-4">Posts</a>
+        </div>
+        <% if user_signed_in? %>
+            <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700" %>
+        <% else %>
+            <div class="flex items-center">
+                <a href="<%= new_user_session_path %>" class="text-white font-bold bg-blue-500 py-2 px-4 rounded hover:bg-blue-700">Log In</a>
+                <a href="<%= new_user_registration_path %>" class="text-white font-bold ml-4 bg-yellow-500 py-2 px-4 rounded hover:bg-yellow-600">Sign Up</a>
+            </div>
+        <% end %>
+    </div>
+</nav>
+
+
+
 
 
 

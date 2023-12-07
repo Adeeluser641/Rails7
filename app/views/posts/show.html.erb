@@ -1,12 +1,20 @@
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div class="max-w-md mx-auto mt-8 p-4 bg-white rounded-lg shadow-lg ml-4">
+  <p class="mb-4">
+    <strong>Title:</strong>
+    <%= @post.title %>
+  </p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
+  <p class="mb-4">
+    <strong>Content:</strong>
+    <%= @post.content %>
+  </p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+
+
+
+<%= render partial: 'comments/comment_section', locals: { post: @post } %>
+
+      <div class="flex items-center mb-4 mt-4 ml-4">
+    <%= link_to 'Back', posts_path, class: 'text-gray-500 hover:text-gray-700' %>
+  </div>
+ 

@@ -1,0 +1,33 @@
+<h2 class="text-lg font-bold mb-4">Comments</h2>
+
+<% @post.comments.each do |comment| %>
+  <div class="mb-4 border rounded-lg p-4 bg-gray-100">
+    <p class="mb-2">
+      <%= comment.user.email %>
+    </p>
+
+    <p class="mb-2">
+      <%= comment.body %>
+    </p>
+
+    <% if comment.user == current_user %>
+      <%= form_with model: [ @post, comment ], method: :delete, local: true, class: 'inline' do |form| %>
+        <%= form.submit 'Delete', data: { turbo_confirm: 'Are you sure?' }, class: 'text-red-500 bg-transparent border-none' %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
+<div>
+  <h2 class="text-lg font-bold mb-4">Add a comment</h2>
+
+  <%= form_with model: [ @post, @post.comments.build ], class: 'mb-4' do |form| %>
+    <div class="mb-4">
+      <%= form.text_area :body, class: 'w-full h-32 px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline', placeholder: 'Your comment...' %>
+    </div>
+
+    <div>
+      <%= form.submit class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+    </div>
+  <% end %>
+</div>

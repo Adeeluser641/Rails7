@@ -1,24 +1,41 @@
-<h1>Main Posts Page</h1>
+<div class="flex justify-center mt-8 h-screen">
+  <div class="max-w-2xl w-full">
+    <div class="bg-white shadow-lg rounded p-6">
+      <h1 class="text-3xl flex justify-center font-bold mb-4">Main Posts Page</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Content</th>
-    <th colspan="3"></th>
-  </tr>
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300">
+          <thead>
+            <tr>
+              <th class="py-2 px-4 mr-8 border-b text-left">Title</th>
+              <th class="py-2 px-4 border-b text-left">Content</th>
+              <th class="py-2 px-4 border-b" colspan="3"></th>
+            </tr>
+          </thead>
 
-  <% @posts.each do |post| %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= post.content %></td>
-      <td><%= link_to 'Show', post %></td>
-      <td><%= link_to 'Edit', edit_post_path(post) %></td>
-     
-    </tr>
-  <% end %>
+          <tbody>
+            <% @posts.each do |post| %>
+              <tr>
+                <td class="py-2 px-4 border-b"><%= post.title %></td>
+                <td class="py-2 px-4 border-b"><%= post.content %></td>
+                <td class="py-2 px-4 border-b">
+                  <%= link_to 'Show', post, class: 'text-blue-500 hover:underline' %>
+                </td>
+                <td class="py-2 px-4 border-b">
+                  <%= link_to 'Edit', edit_post_path(post), class: 'text-yellow-500 hover:underline' %>
+                </td>
+                <td class="py-2 px-4 border-b">
+                  <%= button_to 'Delete', post, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'text-red-500 hover:underline' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
 
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+      <div class="mt-4 flex justify-center">
+        <%= link_to 'New Post', new_post_path, class: 'py-2 px-4 bg-blue-500 mt-4 text-white rounded hover:bg-blue-700' %>
+      </div>
+    </div>
+  </div>
+</div>
